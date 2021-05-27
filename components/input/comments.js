@@ -16,16 +16,19 @@ function Comments(props) {
 			setIsFetchingComment(true);
 			fetch('/api/comments/' + eventId)
 				.then((response) => {
-					if (response.ok) {
-						return response.json();
+					console.log('response', response);
+					if (!response.ok) {
+						// throw new Error('Something went wrong!');
 					}
-					return response.json().then((data) => {
-						throw new Error(data.message || 'Something went wrong!');
-					});
+					// return response.json().then((data) => {
+					// 	throw new Error(data.message || 'Something went wrong!');
+					// });
+					return response.json();
 				})
 				.then((data) => {
 					setIsFetchingComment(false);
-					setListComments(data.comment);
+					console.log(data);
+					// data.comment ? setListComments(data.comment) : setListComments([]);
 				});
 		}
 	}, [showComments]);
