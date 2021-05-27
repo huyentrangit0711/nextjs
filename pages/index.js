@@ -26,7 +26,6 @@ export async function getStaticProps() {
 	const featuredEvents = await findDocument(client, 'events', {
 		isFeatured: true,
 	});
-	console.log('featuredEvents', featuredEvents);
 	return {
 		props: {
 			events: JSON.parse(JSON.stringify(featuredEvents)),

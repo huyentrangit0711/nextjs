@@ -2,8 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Head from 'next/head';
-
-import { getFilteredEvents } from '../../helpers/api-util';
 import EventList from '../../components/events/event-list';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
@@ -14,26 +12,22 @@ function FilteredEventsPage(props) {
 	const router = useRouter();
 
 	const filterData = router.query.slug;
-
-	const { data, error } = useSWR(
-		'https://react-http-learning-default-rtdb.asia-southeast1.firebasedatabase.app/events.json'
-	);
-
+	const fetcher = (...args) => fetch(...args).then((res) => res.json());
+	const { data, error } = useSWR('/api/events', fetcher);
 	useEffect(() => {
 		if (data) {
 			const events = [];
-
-			for (const key in data) {
+			const { result } = data;
+			for (const key in result) {
 				events.push({
 					id: key,
-					...data[key],
+					...result[key],
 				});
 			}
 
 			setLoadedEvents(events);
 		}
 	}, [data]);
-
 	let pageHeadData = (
 		<Head>
 			<title>Filtered Events</title>
