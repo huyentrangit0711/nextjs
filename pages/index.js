@@ -1,6 +1,4 @@
 import Head from 'next/head';
-
-import { getFeaturedEvents } from '../helpers/api-util';
 import EventList from '../components/events/event-list';
 import NewsletterRegistration from '../components/input/newsletter-registration';
 import { connectDatabase, findDocument } from '../helpers/db-utils';
@@ -30,7 +28,7 @@ export async function getStaticProps() {
 		props: {
 			events: JSON.parse(JSON.stringify(featuredEvents)),
 		},
-		revalidate: 1800,
+		revalidate: 1,
 	};
 }
 
