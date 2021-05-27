@@ -1,8 +1,10 @@
 import { MongoClient } from 'mongodb';
-const DATABASE_URL = `${process.env.MONGODB_URI}${process.env.MONGODB_DB}?retryWrites=true&w=majority`;
+const DATABASE_URL = `${process.env.MONGODB_URI}${process.env.MONGODB_DB}`;
 
 export async function connectDatabase() {
-	const client = await MongoClient.connect(DATABASE_URL);
+	const client = await MongoClient.connect(DATABASE_URL, {
+		useUnifiedTopology: true,
+	});
 	return client;
 }
 

@@ -20,7 +20,6 @@ function FilteredEventsPage(props) {
 			const { result } = data;
 			for (const key in result) {
 				events.push({
-					id: key,
 					...result[key],
 				});
 			}

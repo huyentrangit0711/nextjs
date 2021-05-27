@@ -1,7 +1,6 @@
 import { connectDatabase, getDocuments } from '../../../helpers/db-utils';
 
 async function handler(req, res) {
-	console.log('api/events called');
 	if (req.method === 'GET') {
 		let client;
 		try {
